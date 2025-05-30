@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Hero.css";
 
 // PUBLIC_INTERFACE
-function Hero({ heroData, indicators }) {
+function Hero({ heroData, indicators, onIndicatorClick }) {
   // Default hero data for illustration
   const data =
     heroData ||
@@ -26,8 +26,35 @@ function Hero({ heroData, indicators }) {
     "https://images.unsplash.com/photo-1444065381814-865dc9da92c0?auto=format&fit=crop&w=80&q=60"
   ];
 
+  // Animation/focus: animate overlay content on mount
+  const contentRef = useRef(null);
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.classList.add("overlay-animated-in");
+    }
+  }, []);
+
+  // Keyboard action for primary CTA accessibility
+  const handleCTAKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      if (data.primaryCTA && typeof data.primaryCTA.onClick === "function") {
+        data.primaryCTA.onClick();
+      }
+    }
+  };
+
+  // Keyboard action for carousel indicator/accessibility
+  const handleIndicatorKeyDown = (e, idx) => {
+    if ((e.key === "Enter" || e.key === " ") && typeof onIndicatorClick === "function") {
+      e.preventDefault();
+      onIndicatorClick(idx);
+    }
+  };
+
+  // ARIA: The hero/banner is a banner landmark with readable text, and content is accessible
   return (
-    <section className="hero-banner">
+    <section className="hero-banner" role="banner" aria-label="Featured highlight">
       <div
         className="hero-background-image"
         style={{
@@ -37,9 +64,9 @@ function Hero({ heroData, indicators }) {
       >
         <div className="hero-gradient-overlay" />
       </div>
-      <div className="overlay-content">
+      <div className="overlay-content" ref={contentRef}>
         <div className="category-pill">{data.category}</div>
-        <div className="hero-title">
+        <div className="hero-title" aria-label={`${data.titleLeft} versus ${data.titleRight}`}>
           <span className="hero-title-main">{data.titleLeft}</span>
           <span className="hero-title-vs"> {data.vs} </span>
           <span className="hero-title-main">{data.titleRight}</span>
@@ -48,10 +75,16 @@ function Hero({ heroData, indicators }) {
         <div className="hero-date-time">{data.date}</div>
         <div className="hero-description">{data.description}</div>
         <div className="cta-row">
-          <button className="primary-cta-button" onClick={data.primaryCTA.onClick}>
+          <button
+            className="primary-cta-button"
+            onClick={data.primaryCTA.onClick}
+            aria-label={data.primaryCTA.text}
+            tabIndex={0}
+            onKeyDown={handleCTAKeyDown}
+          >
             {data.primaryCTA.text}
           </button>
-          <div className="carousel-indicator-thumbnails">
+          <div className="carousel-indicator-thumbnails" aria-label="Next spotlight items">
             {indicatorThumbs.map((thumb, i) => (
               <img
                 src={thumb}
@@ -59,6 +92,13 @@ function Hero({ heroData, indicators }) {
                 className="indicator-thumbnail"
                 key={thumb + i}
                 draggable="false"
+                tabIndex={typeof onIndicatorClick === "function" ? 0 : -1}
+                style={{ cursor: typeof onIndicatorClick === "function" ? "pointer" : undefined }}
+                onClick={typeof onIndicatorClick === "function" ? () => onIndicatorClick(i) : undefined}
+                onKeyDown={typeof onIndicatorClick === "function"
+                  ? (e) => handleIndicatorKeyDown(e, i)
+                  : undefined}
+                aria-label={typeof onIndicatorClick === "function" ? `Go to item ${i + 2}` : undefined}
               />
             ))}
           </div>

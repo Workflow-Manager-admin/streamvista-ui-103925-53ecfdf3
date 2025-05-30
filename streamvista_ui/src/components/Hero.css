@@ -47,6 +47,14 @@
   flex-direction: column;
   gap: 0.42rem;
   color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+  transition: opacity 0.54s cubic-bezier(.23,.69,.31,1.11), transform 0.64s cubic-bezier(.29,0,.31,1.19);
+}
+
+.overlay-animated-in {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .category-pill {

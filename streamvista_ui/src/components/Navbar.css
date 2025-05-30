@@ -97,57 +97,113 @@
   border-radius: 10px;
 }
 
+/* Horizontal category tab row — Hotstar-style scrollable pills */
 .nav-tabs {
   display: flex;
   flex-direction: row;
   gap: var(--tab-gap);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin: 0 28px;
   height: var(--tab-height);
   align-items: center;
   min-width: 1px;
   flex: 1 1 auto;
+  padding-bottom: 2px;
 }
+.nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hotstar-style tab pill buttons */
 .nav-tab {
   background: var(--tab-bg);
+  color: var(--text-primary);
+  border-radius: 999px;
   border: none;
   outline: none;
-  color: var(--text-primary);
-  border-radius: var(--tab-radius);
   font-size: 1rem;
   font-family: inherit;
   font-weight: 600;
   letter-spacing: .01em;
   height: var(--tab-height);
-  min-width: 54px;
+  min-width: 56px;
   padding: 0 28px;
-  cursor: pointer;
-  transition: background 0.13s, color 0.18s, font-weight 0.18s;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 
+    background 0.18s cubic-bezier(.37,.8,.41,1),
+    color 0.18s cubic-bezier(.37,.8,.41,1),
+    font-weight 0.18s cubic-bezier(.37,.8,.41,1),
+    box-shadow 0.16s, border 0.11s;
   box-shadow: none;
   border-bottom: none;
   position: relative;
-}
-.nav-tab.active,
-.nav-tab:hover,
-.nav-tab:focus-visible {
-  background: var(--accent-gradient);
-  font-weight: 700;
-  color: var(--button-text);
-  box-shadow: 0 3px 16px 0 #0948b31c;
+  user-select: none;
 }
 
+.nav-tab.active {
+  background: var(--accent-gradient);
+  color: var(--button-text);
+  font-weight: 700;
+  box-shadow: 0 4px 18px 0 #0948b31a;
+}
 .nav-tab.active::after {
   content: '';
   position: absolute;
   left: 16px;
   right: 16px;
-  bottom: 7px;
+  bottom: 4px;
   height: 3px;
   border-radius: 2px;
   background: var(--accent-gradient);
   pointer-events: none;
   z-index: 4;
+  opacity: 1;
+  transition: opacity 0.13s;
 }
+
+.nav-tab:not(.active):hover,
+.nav-tab:not(.active):focus-visible {
+  background: #222430;
+  color: var(--text-primary);
+  font-weight: 700;
+  transition: background 0.15s, color 0.13s, font-weight 0.11s;
+  box-shadow: 0 2px 9px 0 #08317d14;
+}
+.nav-tab:active {
+  background: #1d2333;
+  color: var(--accent-primary);
+}
+
+.nav-tab:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Spacing for pixel accuracy & pill shape */
+.nav-tab {
+  border-radius: var(--tab-radius);
+}
+
+@media (max-width: 1200px) {
+  .nav-tabs { gap: 10px; margin: 0 10px;}
+}
+@media (max-width: 900px) {
+  .nav-tabs { gap: 6px; margin: 0 4px; }
+  .nav-tab { padding: 0 14px; font-size: 0.94rem;}
+}
+@media (max-width: 700px) {
+  .nav-tab { padding: 0 10px; font-size: 0.91rem; height: 38px;}
+}
+@media (max-width: 600px) {
+  .nav-tabs { display: none;}
+}
+
 
 .nav-right-block {
   display: flex;

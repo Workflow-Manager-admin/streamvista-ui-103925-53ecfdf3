@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Carousel from "./components/Carousel";
 import MediaDetail from "./components/MediaDetail";
+import Hero from "./components/Hero";
 import { mockCarousels, mockTabs } from "./mockData";
 
 function App() {
@@ -24,8 +25,13 @@ function App() {
     <div className="app-hotstar">
       <Navbar activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <div style={{ height: "56px" }} /> {/* space below navbar */}
+      {/* Hero/banner is always shown at the top of Home tab */}
       <main className="main-hotstar">
+        {activeTab === "Home" && (
+          <section style={{ marginBottom: "36px" }}>
+            <Hero />
+          </section>
+        )}
         {getCurrentCarousels().length === 0 ? (
           <div style={{
             color: "#fff",

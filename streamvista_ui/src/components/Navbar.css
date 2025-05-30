@@ -1,105 +1,199 @@
+/* ===========================
+   HOTSTAR-STYLE NAVIGATION BAR
+   =========================== */
+
+.app-header {
+  position: relative;
+  width: 100vw;
+  z-index: 1100;
+}
+
 .navbar-hotstar {
-  background: #141b29;
-  color: #fff;
+  background: var(--nav-bg);
+  color: var(--icon-default);
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  height: var(--navbar-height);
+  min-height: var(--navbar-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  height: 56px;
-  border-bottom: 1px solid #232949;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 300;
+  box-shadow: 0 1.5px 9px 0 #0b0f2032, 0 1.5px 0 0 #181927;
+  padding: 0 var(--navbar-padding-x);
+  width: 100vw;
+  box-sizing: border-box;
+  /* Ensure full width without horizontal scroll */
+  transition: box-shadow 0.22s cubic-bezier(.37,.8,.41,1);
 }
 
-.navbar-logo {
+.nav-left-block {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 26px;
+  min-width: 0;
 }
-.navbar-logo-img {
-  width: 32px;
-  height: 32px;
-  display: block;
-}
-.navbar-logo-text {
-  font-weight: 700;
-  letter-spacing: 2px;
-  font-size: 1.1rem;
-  color: #00b8d9;
-}
-.navbar-tabs {
-  display: flex;
-  gap: 2px;
-  margin-left: 40px;
-}
-.navbar-tab {
+
+.nav-icon-btn,
+.menu-btn {
   background: none;
   border: none;
-  color: #e3e6f3;
-  font-size: 1rem;
-  padding: 8px 14px;
-  margin-right: 3px;
-  font-weight: 500;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  transition: color 0.16s, border-color 0.16s;
   outline: none;
-}
-.navbar-tab.active,
-.navbar-tab:focus,
-.navbar-tab:hover {
-  color: #fff;
-  border-bottom: 2px solid #00b8d9;
-  background: #23294936;
-}
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.navbar-search {
-  border-radius: 16px;
-  padding: 6px 18px;
-  font-size: 0.95rem;
-  border: none;
-  background: #232949;
-  color: #fff;
-  outline: none;
-  width: 120px;
-  transition: width 0.2s;
-}
-.navbar-search:focus {
-  width: 180px;
-}
-.navbar-profile {
-  background: #00b8d9;
-  color: #fff;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
+  color: var(--icon-default);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.18s;
-}
-.navbar-profile:hover {
-  background: #008faf;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  border-radius: 100%;
+  transition: background 0.14s, box-shadow 0.15s;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 0;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .navbar-hotstar { padding: 0 12px; }
-  .navbar-tabs { margin-left: 10px; }
-  .navbar-logo-text { font-size: 1rem;}
-  .navbar-search { width: 64px; font-size: 0.9rem;}
+.menu-btn {
+  margin-left: 2px;
+  margin-right: 10px;
 }
-@media (max-width: 520px) {
-  .navbar-tabs {display: none;}
-  .navbar-hotstar { height: 48px;}
+
+.nav-icon-btn:focus-visible,
+.nav-icon-btn:hover {
+  background: #23233A88;
+  box-shadow: 0 2px 8px #0b0f2060;
 }
+.menu-btn:focus-visible,
+.menu-btn:hover {
+  background: #23233A;
+  box-shadow: 0 2px 14px #18192722;
+}
+.menu-btn:active {
+  background: #23233abb;
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+  text-decoration: none;
+  outline: none;
+}
+.logo-img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 150px;
+  margin: 0;
+  padding: 0;
+}
+.logo-block:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  border-radius: 10px;
+}
+
+.nav-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: var(--tab-gap);
+  margin: 0 28px;
+  height: var(--tab-height);
+  align-items: center;
+  min-width: 1px;
+  flex: 1 1 auto;
+}
+.nav-tab {
+  background: var(--tab-bg);
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  border-radius: var(--tab-radius);
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: .01em;
+  height: var(--tab-height);
+  min-width: 54px;
+  padding: 0 28px;
+  cursor: pointer;
+  transition: background 0.13s, color 0.18s, font-weight 0.18s;
+  margin: 0;
+  box-shadow: none;
+  border-bottom: none;
+  position: relative;
+}
+.nav-tab.active,
+.nav-tab:hover,
+.nav-tab:focus-visible {
+  background: var(--accent-gradient);
+  font-weight: 700;
+  color: var(--button-text);
+  box-shadow: 0 3px 16px 0 #0948b31c;
+}
+
+.nav-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 7px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.nav-right-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.profile-btn {
+  margin-left: 3px;
+}
+
+.nav-action-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  color: var(--icon-default);
+}
+
+/* Accessibility: focus ring for all actionable nav elements */
+.nav-tab:focus-visible, .nav-icon-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .navbar-hotstar { padding-left: 24px; padding-right: 24px;}
+  .nav-tabs { gap: 10px; margin: 0 10px;}
+}
+@media (max-width: 900px) {
+  .navbar-hotstar { padding-left: 14px; padding-right: 14px;}
+  .nav-tabs { gap: 6px; margin: 0 4px; }
+  .logo-img { height: 34px; }
+  .nav-tab { padding: 0 14px; font-size: 0.94rem;}
+}
+@media (max-width: 700px) {
+  .navbar-hotstar { min-height: 52px; height: 52px;}
+  .logo-img { height: 28px;}
+  .nav-tab { padding: 0 10px; font-size: 0.91rem; height: 38px;}
+}
+@media (max-width: 600px) {
+  .navbar-hotstar { min-height: 46px; height: 46px; }
+  .app-header { min-height: 46px;}
+  .nav-tabs { display: none;}
+  .logo-img { height: 24px;}
+  .menu-btn, .nav-icon-btn { height: 36px; width: 36px;}
+}
+/* Hide tabs on mobile, keep left and right blocks & logo prominent */

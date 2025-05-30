@@ -1,0 +1,191 @@
+.hero-banner {
+  position: relative;
+  width: 100%;
+  min-height: 450px;
+  height: 48vw;
+  max-height: 650px;
+  background: var(--bg-canvas);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-background-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.55s cubic-bezier(.36,.62,.47,1.14), filter 0.28s;
+  will-change: transform;
+}
+
+.hero-banner:hover .hero-background-image,
+.hero-banner:focus-within .hero-background-image {
+  transform: scale(1.02);
+  filter: brightness(0.97);
+}
+
+.hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--hero-overlay-gradient);
+}
+
+/* Overlay content block */
+.overlay-content {
+  position: relative;
+  z-index: 3;
+  padding-left: 48px;
+  padding-bottom: 64px;
+  padding-top: 44px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  color: var(--text-primary);
+}
+
+.category-pill {
+  background: var(--highlight-pill-bg);
+  color: #fff;
+  font-size: 0.89rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  border-radius: 32px;
+  letter-spacing: 0.035em;
+  padding: 7px 22px 5px 22px;
+  margin-bottom: 18px;
+  margin-top: 8px;
+  align-self: flex-start;
+  box-shadow: 0 2px 8px rgba(250,180,43,0.18);
+}
+
+.hero-title {
+  font-size: 2.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.37em;
+  line-height: 1.08;
+}
+
+.hero-title-main {
+  color: #fff;
+}
+
+.hero-title-vs {
+  color: var(--highlight-pill-bg);
+  font-weight: 900;
+  font-size: 2.1rem;
+  margin: 0 0.2em;
+}
+
+.hero-meta {
+  font-size: 1.13rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.hero-date-time {
+  font-size: 1rem;
+  color: var(--text-meta);
+  font-weight: 400;
+  margin-top: 7px;
+  margin-bottom: 0;
+}
+
+.hero-description {
+  font-size: 1rem;
+  color: var(--text-meta);
+  font-weight: 400;
+  margin: 18px 0 0 0;
+  max-width: 520px;
+}
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.primary-cta-button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--button-radius);
+  border: none;
+  height: var(--button-height);
+  min-width: 120px;
+  padding: 0 2.1rem;
+  outline: none;
+  box-shadow: 0 2px 14px #1a237e1a;
+  transition: background 0.22s, box-shadow 0.22s, filter 0.22s;
+  cursor: pointer;
+  letter-spacing: .03em;
+  margin-right: 18px;
+}
+
+.primary-cta-button:hover, .primary-cta-button:focus-visible {
+  filter: brightness(1.15) saturate(1.05);
+  background: linear-gradient(90deg,#0948b3,#2463eb);
+  box-shadow: 0 5px 32px 0 #0948b333;
+}
+
+.carousel-indicator-thumbnails {
+  display: flex;
+  flex-direction: row;
+  gap: 11px;
+  align-items: center;
+}
+
+.indicator-thumbnail {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px #18192755;
+  border: 2px solid #fff3;
+  transition: transform 0.17s, box-shadow 0.21s;
+  background: #222;
+  cursor: pointer;
+  user-select: none;
+}
+.indicator-thumbnail:hover, .indicator-thumbnail:focus-visible {
+  transform: scale(1.15);
+  box-shadow: 0 8px 32px #0a2e5f66;
+  border-color: var(--accent-primary);
+}
+
+/* Responsive rules */
+@media (max-width: 1200px) {
+  .overlay-content { padding-left: 24px; max-width: 470px; }
+  .hero-title { font-size: 2.25rem; }
+}
+@media (max-width: 900px) {
+  .hero-banner { min-height: 298px; height: 46vw; }
+  .overlay-content { padding-left: 12px; padding-bottom: 38px; max-width: 93vw; }
+  .hero-title { font-size: 1.59rem; }
+  .category-pill { font-size: 0.74rem; padding: 5px 14px; }
+  .primary-cta-button { font-size: 1.01rem; height: 38px; min-width: 94px; padding: 0 1.25rem; }
+}
+
+@media (max-width: 600px) {
+  .hero-banner { min-height: 175px; height: 52vw; }
+  .overlay-content { padding-left: 5px; padding-bottom: 14px; }
+  .hero-title { font-size: 1.24rem; }
+  .primary-cta-button { font-size: 0.93rem; height: 30px; min-width: 72px; padding: 0 0.6rem; }
+  .indicator-thumbnail { width: 24px; height: 24px; }
+}

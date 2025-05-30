@@ -108,18 +108,60 @@
   background: linear-gradient(90deg,#00b8d9,#1846b6);
   color: #fff;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
-  border-radius: 6px;
-  transition: background 0.17s;
+  border-radius: 8px;
+  transition:
+    background 0.19s cubic-bezier(.4,.73,.49,1.19),
+    box-shadow 0.19s cubic-bezier(.48,.85,.29,1.24),
+    filter 0.14s;
   margin-top: 6px;
   align-self: flex-start;
   cursor: pointer;
   box-shadow: 0 2px 18px #00b8d96d;
+  outline: none;
+  letter-spacing: .01em;
+  will-change: background, box-shadow, filter;
 }
 
-.media-detail-play:hover {
-  background: #0097c3;
+.media-detail-play:hover,
+.media-detail-play:focus-visible {
+  background: linear-gradient(90deg,#1846b6,#00b8d9 96%);
+  filter: brightness(1.09) saturate(1.2);
+  box-shadow: 0 7px 28px #1846b644;
+  outline: 2px solid #00b8d9;
+  outline-offset: 2px;
+}
+.media-detail-play:active {
+  background: #0c517c;
+  color: #fff;
+  filter: brightness(1.01) grayscale(0.08);
+  box-shadow: 0 2px 7px #00b8d935;
+  outline: none;
+  transition: background 0.11s, box-shadow 0.12s, filter 0.09s;
+}
+.media-detail-play[aria-disabled="true"], .media-detail-play.disabled {
+  opacity: 0.51;
+  pointer-events: none;
+  background: #15536e !important;
+  color: #d3d6e1 !important;
+  box-shadow: none !important;
+  filter: grayscale(0.7) blur(0.6px);
+}
+
+/* Only active feedback on touch (no hover/focus color jump) */
+@media (hover: none) and (pointer: coarse) {
+  .media-detail-play:hover, .media-detail-play:focus-visible {
+    background: linear-gradient(90deg,#00b8d9,#1846b6);
+    filter: none;
+    box-shadow: 0 2px 8px #0a325f3b;
+    outline: none;
+  }
+  .media-detail-play:active {
+    background: #0c517c;
+    color: #fff;
+    box-shadow: 0 2px 4px #1846b635;
+  }
 }
 
 @media (max-width: 700px) {

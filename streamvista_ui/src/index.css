@@ -1,6 +1,12 @@
-/* ==========================================
-   GLOBAL RESETS & HOTSTAR DESIGN TOKENS
-   ========================================== */
+ /* ==========================================
+    GLOBAL RESETS & HOTSTAR DESIGN TOKENS
+    ========================================== */
+
+/* 
+   Pixel-perfect global design system for Hotstar Home Page 
+   Colors, typography, spacing, and layout primitives  
+   See: assets/hotstar_homepage_design_notes.md
+*/
 
 :root {
   /* Color tokens */
@@ -19,10 +25,11 @@
   --highlight-pill-bg: #FFA726;
   --badge-bg: #FFA726;
   --icon-default: #fff;
+
   /* Spacing & sizing tokens */
   --navbar-height: 64px;
   --navbar-padding-x: 40px;
-  --main-padding-x: 40px;
+  --main-padding-x: 40px; /* desktop, can override for mobile via media query */
   --main-padding-x-mobile: 16px;
   --section-spacing-y: 36px;
   --section-title-mb: 16px;
@@ -38,6 +45,7 @@
   --max-content-width: 1400px;
 }
 
+/* Universal box sizing and margin reset */
 *,
 *::before,
 *::after {
@@ -78,7 +86,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.3em 0;
   letter-spacing: 0.01em;
 }
-
 h1 {
   font-size: 2.6rem;
   line-height: 1.13;
@@ -103,6 +110,7 @@ p {
   line-height: 1.6;
 }
 
+/* Links and interactivity */
 a {
   color: var(--accent-primary);
   text-decoration: none;
@@ -110,6 +118,7 @@ a {
 }
 a:hover, a:focus { color: #0948b3; }
 
+/* Form primitives */
 button, input, select, textarea {
   font-family: inherit;
   outline: none;
@@ -128,6 +137,7 @@ code {
   padding: 3px 7px;
 }
 
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 10px;
   background: #181933;
@@ -137,6 +147,14 @@ code {
   border-radius: 10px;
 }
 
+/* Accessibility focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 5px;
+}
+
+/* Responsive breakpoints for primitives and paddings */
 @media (max-width: 1200px) {
   :root {
     --main-padding-x: 24px;
@@ -144,6 +162,7 @@ code {
     --max-content-width: 100vw;
   }
 }
+
 @media (max-width: 900px) {
   :root {
     --main-padding-x: 16px;
@@ -152,6 +171,7 @@ code {
   }
   html { font-size: 15.3px; }
 }
+
 @media (max-width: 600px) {
   :root {
     --main-padding-x: 12px;
@@ -159,4 +179,3 @@ code {
     --carousel-card-width: 140px;
   }
 }
-

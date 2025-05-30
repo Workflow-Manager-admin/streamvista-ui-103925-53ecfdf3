@@ -6,6 +6,11 @@ import MediaDetail from "./components/MediaDetail";
 import Hero from "./components/Hero";
 import { mockCarousels, mockTabs } from "./mockData";
 
+/**
+ * PUBLIC_INTERFACE
+ * App root - implements layout, spacing, section hierarchy and passes handlers/data down.
+ * Strictly matches Hotstar homepage design technical brief.
+ */
 function App() {
   // Track active tab and modal media selection
   const [activeTab, setActiveTab] = useState("Home");
@@ -24,34 +29,39 @@ function App() {
   return (
     <div className="app-hotstar">
       <Navbar activeTab={activeTab} onTabChange={setActiveTab} />
-
-      {/* Hero/banner is always shown at the top of Home tab */}
+      {/* Pixel-precise main content structure */}
       <main className="main-hotstar">
+        {/* Hero/banner only at top of Home, with proper section and spacing */}
         {activeTab === "Home" && (
-          <section style={{ marginBottom: "36px" }}>
+          <section className="section-spacing" style={{ paddingTop: 0, marginBottom: 0 }}>
             <Hero />
           </section>
         )}
+
+        {/* Main carousels / sections, each wrapped in their own section for guaranteed vertical spacing */}
         {getCurrentCarousels().length === 0 ? (
-          <div style={{
-            color: "#fff",
-            padding: "80px 0 0 0",
-            textAlign: "center",
-            fontSize: "1.17rem"
-          }}>
-            No shows available in this section yet!
-          </div>
+          <section className="section-spacing" style={{ padding: "80px 0 0 0" }}>
+            <div style={{
+              color: "#fff",
+              textAlign: "center",
+              fontSize: "1.17rem"
+            }}>
+              No shows available in this section yet!
+            </div>
+          </section>
         ) : (
           getCurrentCarousels().map((carousel, i) => (
-            <Carousel
-              key={carousel.title || i}
-              title={carousel.title}
-              items={carousel.items}
-              onCardClick={setSelectedMedia}
-            />
+            <section className="section-spacing" key={carousel.title || i}>
+              <Carousel
+                title={carousel.title}
+                items={carousel.items}
+                onCardClick={setSelectedMedia}
+              />
+            </section>
           ))
         )}
       </main>
+      {/* Media detail overlay modal, full screen */}
       {selectedMedia &&
         <MediaDetail item={selectedMedia} onBack={handleBack} />
       }

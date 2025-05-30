@@ -1,41 +1,105 @@
-:root {
-  --primary-bg: #141b29;
-  --secondary-bg: #1f2533;
-  --hotstar-accent: #00b8d9;
-  --hotstar-highlight: #1846b6;
-  --hotstar-card: #232949;
-  --hotstar-card-border: #23294999;
-  --hotstar-border: #232949;
-  --text-color: #fff;
-  --text-secondary: #b6c7e7;
-}
+/* =============================================
+   HOTSTAR DESIGN BRIEF: GLOBAL APP + PRIMITIVES
+   ============================================= */
 
-body {
-  margin: 0;
-  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background: var(--primary-bg);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* Core container - STREAMVISTA Hotstar theme  */
 
 .app-hotstar {
   min-height: 100vh;
-  background: var(--primary-bg);
   display: flex;
   flex-direction: column;
-}
-
-.main-hotstar {
-  flex: 1 1 auto;
-  padding: 48px 0 0 0;
-  max-width: 1440px;
-  margin: 0 auto;
+  background: var(--bg-canvas);
   width: 100%;
 }
-@media (max-width: 900px) {
-  .main-hotstar { padding: 40px 0 0 0;}
+
+/* Main content region, respects nav bar and layout rules */
+.main-hotstar {
+  flex: 1 1 auto;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--max-content-width);
+  box-sizing: border-box;
+  padding: calc(var(--navbar-height) + 24px) var(--main-padding-x) 0 var(--main-padding-x);
+  /* Large vertical offset for nav height + 24px as per reference */
+  /* Section spacing handled by descendant rules */
 }
+
+/* Section vertical spacing (content sections, carousels) */
+.section-spacing {
+  margin-top: var(--section-spacing-y);
+  margin-bottom: var(--section-spacing-y);
+}
+
+/* Utility: visually hide (for accessibility) */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Focus ring for a11y (2px subtle accent blue) */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 5px;
+}
+
+/* Typography & titles for main UI elements (redundant: shown for doc clarity) */
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: var(--section-title-mb);
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.text-meta {
+  color: var(--text-meta);
+  font-size: 1rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+.semibold {
+  font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bg-gradient-accent {
+  background: var(--accent-gradient);
+}
+.bg-nav {
+  background: var(--nav-bg);
+}
+
+.bg-canvas {
+  background: var(--bg-canvas);
+}
+
+@media (max-width: 1200px) {
+  .main-hotstar { max-width: 100vw; }
+}
+
+@media (max-width: 900px) {
+  .main-hotstar {
+    padding: calc(var(--navbar-height) + 18px) var(--main-padding-x) 0 var(--main-padding-x);
+  }
+  .section-title { font-size: 1.29rem; }
+}
+
 @media (max-width: 600px) {
-  .main-hotstar { padding: 28px 0 0 0;}
+  .main-hotstar {
+    padding: calc(var(--navbar-height) + 8px) var(--main-padding-x) 0 var(--main-padding-x);
+  }
+  .section-title { font-size: 1.02rem; }
 }

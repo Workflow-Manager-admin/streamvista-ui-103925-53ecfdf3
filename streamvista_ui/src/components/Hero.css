@@ -132,16 +132,61 @@
   padding: 0 2.1rem;
   outline: none;
   box-shadow: 0 2px 14px #1a237e1a;
-  transition: background 0.22s, box-shadow 0.22s, filter 0.22s;
+  transition: 
+    background 0.22s cubic-bezier(.4,.58,.52,1.12),
+    box-shadow 0.22s cubic-bezier(.37,.8,.41,1),
+    filter 0.22s,
+    transform 0.18s;
   cursor: pointer;
   letter-spacing: .03em;
   margin-right: 18px;
+  will-change: background, box-shadow, filter, transform;
+  user-select: none;
 }
 
 .primary-cta-button:hover, .primary-cta-button:focus-visible {
   filter: brightness(1.15) saturate(1.05);
   background: linear-gradient(90deg,#0948b3,#2463eb);
   box-shadow: 0 5px 32px 0 #0948b333;
+  transform: translateY(-2px) scale(1.035);
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.primary-cta-button:active {
+  background: linear-gradient(90deg, #0d34a5, #2463eb 98%);
+  box-shadow: 0 2px 5px #0b185b66;
+  filter: brightness(0.98) saturate(1.01);
+  transform: scale(0.976);
+  outline: none;
+  transition: background 0.13s, box-shadow 0.12s, filter 0.11s, transform 0.12s;
+}
+
+.primary-cta-button[aria-disabled="true"],
+.primary-cta-button.disabled {
+  pointer-events: none;
+  opacity: 0.55;
+  filter: grayscale(0.45) blur(0.5px);
+  background: #1a237e45 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  font-weight: 600;
+}
+
+/* Remove hover/active highlight for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .primary-cta-button:hover, .primary-cta-button:focus-visible {
+    filter: none;
+    background: var(--button-bg);
+    box-shadow: 0 2px 12px #11142548;
+    transform: none;
+    outline: none;
+  }
+  .primary-cta-button:active {
+    background: #123087;
+    filter: none;
+    transform: scale(0.99);
+  }
 }
 
 .carousel-indicator-thumbnails {

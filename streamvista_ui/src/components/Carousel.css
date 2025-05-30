@@ -51,23 +51,60 @@
   scroll-snap-align: start;
   transition:
     transform 0.20s cubic-bezier(.45,.73,.52,1.11),
-    box-shadow 0.20s cubic-bezier(.45,.73,.52,1.11);
-  will-change: transform, box-shadow;
+    box-shadow 0.20s cubic-bezier(.45,.73,.52,1.11),
+    filter 0.18s,
+    outline 0.15s;
+  will-change: transform, box-shadow, filter;
   z-index: 1;
+  outline: none;
+  touch-action: pan-y pinch-zoom;
 }
+
 .carousel-card:focus-visible,
 .carousel-card:hover {
   transform: translateY(-7px) scale(1.0702);
   box-shadow: 0 12px 39px 0 #000d1e8c, 0 4px 14px #23294922;
+  filter: brightness(1.08) saturate(1.03);
   z-index: 3;
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
-.carousel-card:active {
+.carousel-card:active,
+.carousel-card:focus:active {
   box-shadow: 0 3px 9px 0 #183780bb;
   background: #24316d;
   outline: none;
+  filter: brightness(0.98) saturate(0.93);
+  transition: filter 0.13s, box-shadow 0.15s;
+  z-index: 2;
+}
+
+.carousel-card[aria-disabled="true"],
+.carousel-card.disabled {
+  pointer-events: none;
+  filter: grayscale(0.6) blur(0.3px) opacity(0.63);
+  background: #171b28 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+.carousel-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.carousel-row:active .carousel-card {
+  /* subtle hint when touch dragging, cards less pronounced */
+  filter: brightness(0.98) contrast(0.96);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .carousel-card:hover {
+    /* On touch, suppress hover styles, only emphasize tap (active) */
+    transform: none;
+    filter: none;
+    box-shadow: 0 2.5px 14px 0 #13172542;
+  }
 }
 
 .carousel-card-img {

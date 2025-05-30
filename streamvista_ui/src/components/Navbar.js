@@ -89,8 +89,8 @@ function Navbar({ activeTab, onTabChange }) {
             <img src="/logo192.png" alt="Hotstar Logo" className="logo-img" />
           </a>
         </div>
-        <div className="nav-tabs" role="tablist">
-          {["Home", "TV", "Movies", "Sports", "News", "Premium"].map((tab) => (
+        <div className="nav-tabs" role="tablist" aria-label="Category tabs">
+          {["Home", "TV", "Movies", "Sports", "News", "Premium"].map((tab, idx) => (
             <button
               key={tab}
               className={`nav-tab${activeTab === tab ? " active" : ""}`}
@@ -98,6 +98,9 @@ function Navbar({ activeTab, onTabChange }) {
               tabIndex={0}
               role="tab"
               aria-selected={activeTab === tab}
+              aria-controls={`tabpanel-${tab.toLowerCase()}`}
+              id={`tab-${tab.toLowerCase()}`}
+              style={{}}
             >
               {tab}
             </button>
